@@ -66,7 +66,7 @@ const ChatInput = () => {
         />
         <button
           type="submit"
-          disabled={!prompt}
+          disabled={!prompt && !sample}
           className="flex bg-[#11A37F] hover:opacity-50 text-white font-bold px-4 py-2 rounded disabled:bg-gray-300 disabled:cursor-not-allowed"
         >
           <PaperAirplaneIcon className="h-5 w-5 -rotate-45" />
