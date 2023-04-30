@@ -8,14 +8,12 @@
         "default_title": "React Boilerplate",
         "default_icon" : "icon.png"
     },
-    "chrome_url_overrides": {
-        "newtab": "newTab.html"
-    },
     "permissions": [
         "tabs",
         "bookmarks",
         "storage",
-        "identity"
+        "identity",
+        "commands"
     ],
     "icons": {
         "16" : "icon.png",
@@ -25,6 +23,14 @@
     "options_page": "options.html",
     "background": {
         "service_worker": "background.js"
+    },
+    "commands": {
+        "inject-script": {
+          "suggested_key": {
+            "default": "Ctrl+Shift+Y"
+          },
+          "description": "inject a script on the page"
+        }
     },
     "content_scripts": [
         {
