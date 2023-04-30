@@ -4,8 +4,15 @@ import { PaperAirplaneIcon } from "@heroicons/react/24/outline";
 import query from "../lib/query"; // import the query function
 import Res from "./Res";
 
+const promptChoices = [
+  "Write an email using the following information",
+  "I'm feeling creative, give me something to work with.",
+  "Write a rap song using this info",
+];
+
 const ChatInput = () => {
   const [prompt, setPrompt] = useState("");
+  const [sample, setSample] = useState(""); // prompt sample
   const [response, setResponse] = useState(""); // response state
 
   const sendMessage = async (e: FormEvent) => {
@@ -18,7 +25,7 @@ const ChatInput = () => {
     const notification = toast.loading("chatGPT is working on it...");
 
     // call the query function with the prompt and model
-    const response = await query(prompt, "text-davinci-003");
+    const response = await query(input, "text-davinci-003");
     setResponse(response);
 
     // check if the response is an error message
@@ -33,11 +40,27 @@ const ChatInput = () => {
 
   return (
     <div className="">
-      <form className=" bg-gray-800 text-gray-400 rounded-lg text-sm p-5 space-x-5 flex" onSubmit={sendMessage}>
+      <div className="space-y-2 inline-block bg-black/20 p-2 rounded-lg">
+        <h1 className="text-xs font-medium text-gray-100">
+          Running out of ideas? Try one of these prompts:
+        </h1>
+
+        {promptChoices.map((choice) => (
+          <ul className=" hover:bg-gray-600/50 p-[2px] rounded-md indent-3 cursor-pointer
+           transition-colors duration-300"
+           onClick={()=> setSample(choice)}>
+            <li className=" text-gray-200">◽{choice}</li>
+          </ul>
+        ))}
+      </div>
+      <form
+        className="mt-2 bg-gray-800 text-gray-400 rounded-lg text-sm p-5 space-x-5 flex"
+        onSubmit={sendMessage}
+      >
         <input
           type="text"
           className="bg-transparent flex-1 disabled:cursor-not-allowed disabled:text-gray-300 focus:outline-none"
-          value={prompt}
+          value={sample+""+prompt}
           onChange={(ch) => setPrompt(ch.target.value)}
           placeholder="Type your message here..."
         />
