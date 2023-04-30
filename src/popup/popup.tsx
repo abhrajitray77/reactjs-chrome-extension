@@ -1,11 +1,16 @@
 import React from "react";
+import ChatInput from "../components/ChatInput";
+import { Route, Routes } from "react-router-dom";
+import Clips from "../components/Clips";
+import GptHome from "../components/GptHome";
 
 const Popup = () => {
-    return (
-        <div>
-            <h1 className="text-4xl text-green-500">Works man. Finally 😭</h1>
-        </div>
-    )
+  return (
+    <Routes>
+      <Route path="/" element={<GptHome />} />
+      <Route path="/Clips" element={<Clips />} />
+    </Routes>
+  );
 };
 
 export default Popup;

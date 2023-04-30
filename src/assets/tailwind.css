@@ -3,6 +3,11 @@
 @tailwind utilities;
 
 body {
-    height: 400px;
+    background-image: url("../assets/dark-gradient.webp");
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    min-height: 400px;
     width: 400px;
+    
 }
