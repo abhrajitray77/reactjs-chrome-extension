@@ -32,8 +32,8 @@ const ChatInput = () => {
   };
 
   return (
-    <div className=" bg-gray-800 text-gray-400 rounded-lg text-sm">
-      <form className="p-5 space-x-5 flex" onSubmit={sendMessage}>
+    <div className="">
+      <form className=" bg-gray-800 text-gray-400 rounded-lg text-sm p-5 space-x-5 flex" onSubmit={sendMessage}>
         <input
           type="text"
           className="bg-transparent flex-1 disabled:cursor-not-allowed disabled:text-gray-300 focus:outline-none"

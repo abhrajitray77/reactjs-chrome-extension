@@ -14,9 +14,19 @@ const Navbar = () => {
 
   return (
     <nav className="p-5">
-      <ul className="flex space-x-3 text-gray-100">
-        <li onClick={()=>routeChange("/")}>GPT</li>
-        <li onClick={()=>routeChange("/Clips")}>Clips</li>
+      <ul className="flex space-x-6 text-gray-100 text-md font-medium ">
+        <li
+          className="cursor-pointer hover:text-green-400 hover:scale-110 transition-all duration-500"
+          onClick={() => routeChange("/")}
+        >
+          GPT
+        </li>
+        <li
+          className="cursor-pointer hover:scale-110 transition-all duration-500"
+          onClick={() => routeChange("/Clips")}
+        >
+          Clipboard
+        </li>
       </ul>
     </nav>
   );

@@ -5,7 +5,6 @@ import Popup from "./popup";
 import { BrowserRouter, MemoryRouter, Router } from "react-router-dom";
 import Navbar from "../components/Navbar";
 
-
 function init() {
   const appContainer = document.createElement("div");
   document.body.appendChild(appContainer);
@@ -17,7 +16,9 @@ function init() {
   root.render(
     <MemoryRouter>
       <Navbar />
-      <Popup />
+      <div className="mx-4">
+        <Popup />
+      </div>
     </MemoryRouter>
   );
 }
