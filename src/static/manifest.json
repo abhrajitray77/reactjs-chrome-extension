@@ -9,11 +9,13 @@
         "default_icon" : "icon.png"
     },
     "permissions": [
+        "scripting",
         "tabs",
         "bookmarks",
         "storage",
         "identity",
-        "commands"
+        "commands",
+        "activeTab"
     ],
     "icons": {
         "16" : "icon.png",
@@ -25,13 +27,16 @@
         "service_worker": "background.js"
     },
     "commands": {
-        "inject-script": {
-          "suggested_key": {
-            "default": "Ctrl+Shift+Y"
-          },
-          "description": "inject a script on the page"
+        "select-element": {
+            "suggested_key": {
+                "default": "Ctrl+Shift+Y"
+            },
+            "description": "Select an element to clip and save its text."
         }
     },
+    "externally_connectable": {
+        "matches": [ "<all_urls>" ]
+      },
     "content_scripts": [
         {
             "matches": ["<all_urls>"],
