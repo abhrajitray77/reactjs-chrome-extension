@@ -1,6 +1,6 @@
 import { TrashIcon, XMarkIcon } from "@heroicons/react/24/outline";
 import React, { useEffect, useState } from "react";
-
+//to display the clips and delete them
 const Clips = () => {
   const [elements, setElements] = useState([]);
 
@@ -17,13 +17,13 @@ const Clips = () => {
       }
     });
   }, []);
-
+//for total clear
   const handleClearStorage = () => {
     chrome.storage.local.clear(() => {
       setElements([]);
     });
   };
-
+//for individual clear
   const handleRemoveItem = (id) => {
     chrome.storage.local.remove(id, () => {
       setElements((prevState) => prevState.filter((elem) => elem.id !== id));
@@ -53,10 +53,19 @@ const Clips = () => {
           </button>
           <ul className="text-gray-100">
             {elements.map((element) => (
-              <li key={element.id} className=" hover:bg-black/20 m-1 p-[2px] truncate">
+              <li key={element.id} className=" hover:bg-black/20 m-1 p-1">
                 <p>Text: {element.text}</p>
-                <p>URL: {element.url}</p>
-                <button onClick={() => handleRemoveItem(element.id)} className="text-red-500 w-6 h-6">
+                <p
+                  className="hover:underline-offset-1 underline text-cyan-200
+                hover:text-cyan-400 break-words"
+                >
+                  URL: {element.url} 
+                </p>
+
+                <button
+                  onClick={() => handleRemoveItem(element.id)}
+                  className="text-red-500 w-6 h-6"
+                >
                   <XMarkIcon />
                 </button>
               </li>

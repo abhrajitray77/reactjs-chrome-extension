@@ -1,11 +1,6 @@
 console.log("Background script running.");
-//keyboard trigger
-/* chrome.commands.onCommand.addListener((command) => {
-  if (command === "select-element") {
-    console.log("Select element command triggered.");
-  }
-});
- */
+
+//keyboard shortcut trigger
 chrome.commands.onCommand.addListener((command) => {
   if (command === "select-element") {
     chrome.tabs.query({ active: true, currentWindow: true }, (tabs) => {
@@ -32,6 +27,13 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
         console.error(chrome.runtime.lastError);
       } else {
         console.log("Text saved to local storage.");
+        // Sending a notification to the user
+        chrome.notifications.create({
+          type: "basic",
+          title: "Element saved!",
+          message: `Text: ${text}\nURL: ${url}`,
+          iconUrl: "icon.png",
+        });
       }
     });
     chrome.storage.local.get([id], (result) => {

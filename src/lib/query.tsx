@@ -3,10 +3,10 @@ import openai from "./chatgpt";
 const query = async (prompt: string, model: string) => {
   const res = await openai.createCompletion({
       model,
-      prompt,
-      temperature: 0.9,
-      top_p: 1,
-      max_tokens: 1000,
+      prompt, //fetching the prompt and model from chatinput component
+      temperature: 0.9, //modify this to change the creativity of the response
+      top_p: 1, 
+      max_tokens: 1000, //modify this to change the length of the response
       frequency_penalty: 0,
       presence_penalty: 0,
     })
