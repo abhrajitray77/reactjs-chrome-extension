@@ -21,23 +21,23 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
   }
 });
 //for saving
-
-
 chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
   if (message.action === "save-text") {
     const { text, url } = message.payload;
-    console.log("Saving text:", text, "from url:", url);
-    // Saving the selected text and url to local storage
-    chrome.storage.local.set({ [url]: text }, () => {
+    const id = Date.now().toString(); // Generate a unique id based on the current time
+    console.log("Saving text:", text, "from url:", url, "with id:", id );
+    // Saving the selected text, url and id to local storage
+    chrome.storage.local.set({ [id]: { text, url, id } }, () => {
       if (chrome.runtime.lastError) {
         console.error(chrome.runtime.lastError);
       } else {
         console.log("Text saved to local storage.");
       }
     });
-    chrome.storage.local.get(["url"]).then((result) => {
-      console.log("Value currently is " + result.key);
+    chrome.storage.local.get([id], (result) => {
+      console.log("Value currently is ", result);
     });
-    
   }
 });
+
+

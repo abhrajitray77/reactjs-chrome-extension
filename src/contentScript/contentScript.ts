@@ -94,8 +94,9 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
       if (event.button === 0) {
         if (selectedElement) {
           const text = selectedElement.innerText;
+    //      const elemid = selectedElement.id;
           const url = window.location.href;
-          chrome.runtime.sendMessage({ action: "save-text", payload: { text, url } });
+          chrome.runtime.sendMessage({ action: "save-text", payload: { text, url /*, elemid  */} });
         }
         stopHighlighting();
       }

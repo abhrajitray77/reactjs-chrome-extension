@@ -1,39 +1,38 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState } from "react";
 
 const Clips = () => {
-  const [clips, setClips] = useState([]);
+  const [elements, setElements] = useState([]);
 
   useEffect(() => {
-    // Retrieving saved data from local storage
-    chrome.storage.local.get({ clips: [] }, ({ clips }) => {
-      if (chrome.runtime.lastError) {
-        console.error(chrome.runtime.lastError);
-      } else {
-        setClips(clips);
-      }
+    chrome.storage.local.get(null, (data) => {
+      setElements(Object.values(data));
     });
-  
-    // Listening for changes to the local storage and updating the state
-    chrome.storage.onChanged.addListener((changes, areaName) => {
-      if (areaName === "local" && changes.clips) {
-        setClips(changes.clips.newValue);
+
+    chrome.storage.onChanged.addListener((changes, namespace) => {
+      if (namespace === "local") {
+        chrome.storage.local.get(null, (data) => {
+          setElements(Object.values(data));
+        });
       }
     });
   }, []);
-  
 
   return (
     <div>
-      <h1 className='text-gray-100 font-semibold text-xl'>Here's your saved clips-</h1>
-      {clips.length === 0 ? (
-        <p className='text-white'>You don't have any saved clips yet.</p>
-      ) : (
-        <ul className='text-white'>
-          {clips.map((clip, index) => (
-            <li key={index}>{clip}</li>
-          ))}
-        </ul>
+      <h1 className="text-gray-100 font-semibold text-xl">
+        Here's your saved clips-
+      </h1>
+      {elements.length === 0 && (
+        <p className="text-gray-100">No clips saved yet!</p>
       )}
+      <ul className="text-gray-100">
+        {elements.map((element) => (
+          <li key={element.id} className=" hover:bg-black/20 m-1">
+            <p>Text: {element.text}</p>
+            <p>URL: {element.url}</p>
+          </li>
+        ))}
+      </ul>
     </div>
   );
 };
