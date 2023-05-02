@@ -8,7 +8,6 @@ window.onload = (event) => {
 
 chrome.runtime.sendMessage({ type: "init" }, (response) => {
   if (response.type === "init") {
-    // Now it's safe to send messages to the background script
     const extensionId = "gcdheamihdghgigdeefeeflikiohkbmi";
     const url = "chrome-extension://" + extensionId;
     chrome.runtime.sendMessage(extensionId, { action: "select-element", url }, (response) => {
@@ -18,7 +17,7 @@ chrome.runtime.sendMessage({ type: "init" }, (response) => {
 });
 
 let selectedElement: HTMLElement | null = null;
-
+/* 
 let isDragging: boolean = false;
 let startX: number, startY: number, endX: number , endY : number;
 
@@ -32,10 +31,12 @@ document.addEventListener("mousemove", function (event) {
   if (isDragging) {
     endX = event.pageX;
     endY = event.pageY;
+    console.log(startX, startY);
   }
 });
 
 document.addEventListener("mouseup", function (event) {
+  console.log("dragging or nah: ", isDragging)
   if (isDragging) {
     isDragging = false;
     const x = event.pageX;
@@ -55,18 +56,12 @@ document.addEventListener("mouseup", function (event) {
       payload: { text: selectedText, url: window.location.href },
     });
   }
-});
+}); */
 
 
-chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
-  if (message.action === "select-element") {
-    selectedElement = null;
-    document.addEventListener("mouseover", highlightElement);
-  }
-});
 
-function highlightElement(event: MouseEvent) {
-  const element = event.target as HTMLElement;
+function highlightElement(event) {
+  const element = event.target;
   if (selectedElement !== element) {
     if (selectedElement) {
       selectedElement.style.outline = "";
@@ -77,9 +72,33 @@ function highlightElement(event: MouseEvent) {
   event.stopPropagation();
 }
 
-window.addEventListener("keydown", function (event) {
-  if (event.key === "Escape" && selectedElement) {
+function stopHighlighting() {
+  if (selectedElement) {
     selectedElement.style.outline = "";
     selectedElement = null;
+  }
+  document.removeEventListener("mouseover", highlightElement);
+  document.removeEventListener("keydown", stopHighlighting);
+}
+
+chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
+  if (message.action === "select-element") {
+    selectedElement = null;
+    document.addEventListener("mouseover", highlightElement);
+    document.addEventListener("keydown", function(event) {
+      if (event.key === "Escape") {
+        stopHighlighting();
+      }
+    });
+    document.addEventListener("click", function(event) {
+      if (event.button === 0) {
+        if (selectedElement) {
+          const text = selectedElement.innerText;
+          const url = window.location.href;
+          chrome.runtime.sendMessage({ action: "save-text", payload: { text, url } });
+        }
+        stopHighlighting();
+      }
+    });
   }
 });
