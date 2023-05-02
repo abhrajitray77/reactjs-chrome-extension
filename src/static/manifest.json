@@ -27,7 +27,7 @@
         "service_worker": "background.js"
     },
     "commands": {
-        "select_element": {
+        "select-element": {
             "suggested_key": {
                 "default": "Ctrl+Shift+Y"
             },

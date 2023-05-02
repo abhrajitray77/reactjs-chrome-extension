@@ -20,7 +20,7 @@ chrome.runtime.sendMessage({ type: "init" }, (response) => {
   }
 });
 
-document.addEventListener("mousedown", function (event) {
+/* document.addEventListener("mousedown", function (event) {
   startX = event.pageX;
   startY = event.pageY;
   isDragging = true;
@@ -73,4 +73,4 @@ window.addEventListener("keydown", function (event) {
     selectedElement.style.outline = "";
     selectedElement = null;
   }
-});
+}); */
