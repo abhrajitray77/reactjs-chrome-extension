@@ -1,7 +1,7 @@
 {
     "manifest_version": 3,
-    "name": "react-boilerplate",
-    "description": "react-boilerplate for chrome extension",
+    "name": "gpt3-web-clipper",
+    "description": "a gp3 intergrated web clipper",
     "version": "1.0.0",
     "action" : {
         "default_popup": "popup.html",
@@ -27,7 +27,7 @@
         "service_worker": "background.js"
     },
     "commands": {
-        "select-element": {
+        "select_element": {
             "suggested_key": {
                 "default": "Ctrl+Shift+Y"
             },

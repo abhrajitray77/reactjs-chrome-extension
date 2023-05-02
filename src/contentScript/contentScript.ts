@@ -1,7 +1,3 @@
-chrome.runtime.onMessageExternal.addListener(function(request, sender, sendResponse) {
-  console.log(request);
-  console.log('I am content script');
-});
 
 // Log a message when the page is fully loaded
 window.onload = (event) => {
@@ -10,8 +6,8 @@ window.onload = (event) => {
 
 let selectedElement: HTMLElement | null = null;
 
-let isDragging = false;
-let startX, startY, endX, endY;
+let isDragging: boolean = false;
+let startX: number, startY: number, endX: number , endY : number;
 
 chrome.runtime.sendMessage({ type: "init" }, (response) => {
   if (response.type === "init") {
@@ -53,7 +49,7 @@ document.addEventListener("mouseup", function (event) {
   }
 });
 
-chrome.runtime.onMessageExternal.addListener((message, sender, sendResponse) => {
+chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
   if (message.action === "select-element") {
     selectedElement = null;
     document.addEventListener("mouseover", highlightElement);
