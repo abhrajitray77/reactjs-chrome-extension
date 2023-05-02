@@ -12,8 +12,8 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
     sendResponse({ type: "init" });
   }
 });
-/* 
-chrome.runtime.onMessageExternal.addListener((message, sender, sendResponse) => {
+
+chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
   if (message.action === "save-text") {
     const { text, url } = message.payload;
     // Saving text and url to local storage
@@ -21,4 +21,4 @@ chrome.runtime.onMessageExternal.addListener((message, sender, sendResponse) => 
       console.log("Text saved to local storage.");
     });
   }
-}); */
+});

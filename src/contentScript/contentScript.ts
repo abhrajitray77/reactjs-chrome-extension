@@ -4,10 +4,7 @@ window.onload = (event) => {
   console.log('Page is fully loaded');
 };
 
-let selectedElement: HTMLElement | null = null;
 
-let isDragging: boolean = false;
-let startX: number, startY: number, endX: number , endY : number;
 
 chrome.runtime.sendMessage({ type: "init" }, (response) => {
   if (response.type === "init") {
@@ -20,7 +17,12 @@ chrome.runtime.sendMessage({ type: "init" }, (response) => {
   }
 });
 
-/* document.addEventListener("mousedown", function (event) {
+let selectedElement: HTMLElement | null = null;
+
+let isDragging: boolean = false;
+let startX: number, startY: number, endX: number , endY : number;
+
+document.addEventListener("mousedown", function (event) {
   startX = event.pageX;
   startY = event.pageY;
   isDragging = true;
@@ -36,18 +38,25 @@ document.addEventListener("mousemove", function (event) {
 document.addEventListener("mouseup", function (event) {
   if (isDragging) {
     isDragging = false;
-    const selectedElement = document.elementFromPoint(
-      endX,
-      endY
-    ) as HTMLElement;
-    const selectedText = selectedElement.innerText;
+    const x = event.pageX;
+    const y = event.pageY;
+    if (!Number.isFinite(x) || !Number.isFinite(y)) {
+      console.error("Invalid page coordinates:", x, y);
+      return;
+    }
+    const selectedElement = document.elementFromPoint(x, y) as HTMLElement;
+    let selectedText = "";
+    if (selectedElement != null) {
+      selectedText = selectedElement.innerText;
     console.log(selectedText);
+    }
     chrome.runtime.sendMessage({
       action: "save-text",
       payload: { text: selectedText, url: window.location.href },
     });
   }
 });
+
 
 chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
   if (message.action === "select-element") {
@@ -73,4 +82,4 @@ window.addEventListener("keydown", function (event) {
     selectedElement.style.outline = "";
     selectedElement = null;
   }
-}); */
+});
