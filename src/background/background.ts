@@ -26,6 +26,7 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
 chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
   if (message.action === "save-text") {
     const { text, url } = message.payload;
+    console.log("Saving text:", text, "from url:", url);
     // Saving the selected text and url to local storage
     chrome.storage.local.set({ [url]: text }, () => {
       if (chrome.runtime.lastError) {
