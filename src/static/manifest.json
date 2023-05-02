@@ -5,7 +5,7 @@
     "version": "1.0.0",
     "action" : {
         "default_popup": "popup.html",
-        "default_title": "React Boilerplate",
+        "default_title": "gpt3 web clipper",
         "default_icon" : "icon.png"
     },
     "permissions": [
