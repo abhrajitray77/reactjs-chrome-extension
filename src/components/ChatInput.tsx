@@ -20,6 +20,7 @@ const ChatInput = () => {
     if (!prompt) return;
 
     const input = prompt.trim();
+    setSample("");
     setPrompt("");
 
     const notification = toast.loading("chatGPT is working on it...");
@@ -48,7 +49,7 @@ const ChatInput = () => {
         {promptChoices.map((choice) => (
           <ul className=" hover:bg-gray-600/50 p-[2px] rounded-md indent-3 cursor-pointer
            transition-colors duration-300"
-           onClick={()=> setSample(choice)}>
+           onClick={()=> {setSample(choice)}}>
             <li className=" text-gray-200">◽{choice}</li>
           </ul>
         ))}
@@ -60,8 +61,8 @@ const ChatInput = () => {
         <input
           type="text"
           className="bg-transparent flex-1 disabled:cursor-not-allowed disabled:text-gray-300 focus:outline-none"
-          value={sample+""+prompt}
-          onChange={(ch) => setPrompt(ch.target.value)}
+          value={sample ? sample + " " + prompt : prompt}
+          onChange={(ch) => {setPrompt(ch.target.value); setSample("")}}
           placeholder="Type your message here..."
         />
         <button

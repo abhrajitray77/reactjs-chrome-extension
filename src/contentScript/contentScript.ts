@@ -1,6 +1,6 @@
 
 // Log a message when the page is fully loaded
-window.onload = (event) => {
+window.onload = (event: Event) => {
   console.log('Page is fully loaded');
 };
 
@@ -41,12 +41,12 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
   if (message.action === "select-element") {
     selectedElement = null;
     document.addEventListener("mouseover", highlightElement);
-    document.addEventListener("keydown", function(event) {
+    document.addEventListener("keydown", function(event: KeyboardEvent) {
       if (event.key === "Escape") {
         stopHighlighting();
       }
     });
-    document.addEventListener("click", function(event) {
+    document.addEventListener("click", function(event: MouseEvent) {
       if (event.button === 0) {
         if (selectedElement) {
           const text = selectedElement.innerText;
