@@ -1,8 +1,9 @@
 # ReactJS Chrome Extension with GPT-3 integration and Webpage text clipping
 ## OpenAi model integration
-[preview](https://user-images.githubusercontent.com/67530432/235746084-2c0694c6-c205-40a0-b034-533e745d548f.webm)
+[gptext.webm](https://github.com/abhrajitray77/reactjs-chrome-extension/assets/67530432/c9b8f1e0-50d9-4862-9705-a59603372920)
+
 ## clipping
-[clipping.webm](https://user-images.githubusercontent.com/67530432/235746620-1cf1ccd7-87ea-4843-8ac9-8287596b2740.webm)
+[clipping.webm](https://github.com/abhrajitray77/reactjs-chrome-extension/assets/67530432/f7a0e2fa-31bd-4c78-bb52-6ac3e24b5889)
 
 # Steps for installation
 
