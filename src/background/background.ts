@@ -36,9 +36,9 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
         });
       }
     });
-    chrome.storage.local.get([id], (result) => {
+/*     chrome.storage.local.get([id], (result) => {
       console.log("Value currently is ", result);
-    });
+    }); */
   }
 });
 

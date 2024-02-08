@@ -27,6 +27,7 @@
     "webpack-merge": "^5.8.0"
   },
   "dependencies": {
+    "@google/generative-ai": "^0.2.0",
     "@heroicons/react": "^2.0.17",
     "autoprefixer": "^10.4.7",
     "openai": "^3.2.1",

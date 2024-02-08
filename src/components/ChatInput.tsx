@@ -26,7 +26,7 @@ const ChatInput = () => {
     const notification = toast.loading("chatGPT is working on it...");
 
     // call the query function with the prompt and model
-    const response = await query(input, "text-davinci-003");
+    const response = await query(input, "gemini-pro");
     setResponse(response);
 
     // check if the response is an error message
